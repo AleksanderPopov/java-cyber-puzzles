@@ -1,0 +1,22 @@
+First of all - you have really CRITICAL problem with environment, its not okay if it can handle only one test suite at a time.
+
+Second - right answer for question "Please suggest possible solutions how to ensure integration tests will always pass" is - comment your tests content.
+    Better question is "Please suggest possible solutions how to ensure that app integration works fine using automation tests" or so
+     (we want product to be good, not tests to be green right? :) ).
+
+You can go two ways:
+    * increase potential of that test en instance to be able to handle multiple app instances
+        + pros:
+            + you feel's like a god using 64-128 cores machine
+        - cons:
+            - seems like hard to do
+            - if that node is offline, all your app instances cant be tested with integration suite
+            - if we have to deal with same data accessed from multiple consumers, there probably will be some mess with it, which are hard to track
+            - you will need to spend extra time every time when quantity of app instances increasing
+    * increate quantity of test environment instances (separate for each app will be great)
+        + pros:
+            + that makes every app instance + test env instance pair independent from all the others, which in qa world is always great
+            + after standartizing process for deploying new test env instance it will be easy to scale test environment for any number of app instances
+            + in case of failure of one test instance that probably easy to run new one (or take other app instance test env for a while? please :) )
+        - cons:
+            - probably will take more time to create documentation, and develop whole process to deploy new test env instance from scratch
